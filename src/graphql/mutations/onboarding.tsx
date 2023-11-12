@@ -4,6 +4,8 @@ export const CREATE_USER = gql`
   mutation CreateUser($authProvider: AuthProviderSignupData!) {
     createUser( authProvider: $authProvider) {
       id
+      emailConfirmation
+      authenticationToken
     }
   }
 `;

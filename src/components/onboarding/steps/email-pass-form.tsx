@@ -9,11 +9,8 @@ interface EmailPassFormProps {
 }
 
 export default function EmailPassForm({nextStep}: EmailPassFormProps) {
-    const [createUser, { data, loading, error }] = useMutation(CREATE_USER, {
-        refetchQueries: [
-            GET_ACCOUNT_INFO
-          ],
-    });
+    const { loading: queryLoading, error: queryError, data: queryData, refetch } = useQuery(GET_ACCOUNT_INFO);
+    const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
     const [emailError, setEmailError] = useState("");
     const [passError, setPassError] = useState("");
@@ -34,7 +31,10 @@ export default function EmailPassForm({nextStep}: EmailPassFormProps) {
                 }
             }
             const response = await createUser({ variables: { authProvider }});
-            nextStep()
+            localStorage.setItem("auth_token", response.data.createUser.authenticationToken)
+            await refetch();
+            nextStep();
+
         }
     }
 

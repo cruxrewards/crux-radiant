@@ -34,9 +34,10 @@ export default function Navbar() {
   const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
 
   async function logout() {
+    router.push('/');
     const response = await signoutUser();
     await refetch();
-    router.push('/');
+    localStorage.removeItem("auth_token");
   }
 
   return (

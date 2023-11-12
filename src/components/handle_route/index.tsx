@@ -13,6 +13,7 @@ interface HandleRouteProps {
 export default function HandleRoute({Component, pageProps}: HandleRouteProps) {
     const { loading, error, data } = useQuery(GET_ACCOUNT_INFO);
     const router = useRouter();
+    console.log("in route handler", data)
 
     const routeRequiresAuthentication = router.pathname.startsWith("/dashboard") || router.pathname.startsWith("/onboarding");
     const routeRequiresOnboarding = router.pathname.startsWith("/onboarding");
@@ -22,6 +23,8 @@ export default function HandleRoute({Component, pageProps}: HandleRouteProps) {
 
     useEffect(() => {
         if (data && data.getAccountInfo) {
+            console.log("routing")
+
             if (data.getAccountInfo.status === "ONBOARDING") {
                 router.push("/onboarding");
             }
@@ -35,6 +38,7 @@ export default function HandleRoute({Component, pageProps}: HandleRouteProps) {
     }, [loading])
 
     if (loading || routeRequiresUserDetails && (data && data.getAccountInfo !== "ONBOARDING")) {
+        console.log(loading, )
         return null;
     } else {
         return <Component {...pageProps} />;

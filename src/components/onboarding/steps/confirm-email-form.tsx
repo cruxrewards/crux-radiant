@@ -23,7 +23,9 @@ export default function ConfirmEmailForm({nextStep}: ConfirmEmailProps) {
 
         const confirmationToken = e.target.value;
         if (confirmationToken.length === 6) {
+            console.log("token", confirmationToken)
             await confirmEmail({ variables: { confirmationToken }}).then((data) =>{
+                console.log("confirm emaild data", data)
                 if (data.data.confirmEmail.status === "failure") {
                     setCodeError("Invalid Code")
                 } else {
