@@ -19,21 +19,21 @@ export default function Home() {
     </Head>
     
     <div className="bg-white">
-        <header className="absolute inset-x-0 top-0 z-50">
+        {/* <header className="absolute inset-x-0 top-0 z-50">
           <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div className="py-5">
               <div className='h-[10px]'>
-                {/* <Image
+                <Image
                   className='object-contain'
                   src="/orig_color.svg"
                   alt="Crux Logo"
                   fill
-                /> */}
+                />
               </div>
               
             </div>
           </nav>
-        </header>
+        </header> */}
 
         <div className="flex flex-col relative isolate px-6 pt-14 lg:px-8 min-h-screen overflow-hidden">
           <div
