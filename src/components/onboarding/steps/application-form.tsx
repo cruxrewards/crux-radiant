@@ -53,9 +53,6 @@ export default function ApplicationForm({nextStep}: ApplicationFormProps) {
 
     return (
         <div className="border: 2px solid black">
-            <div className="flex flex-col items-center">
-                <h1 className="uppercase text-6xl lg:text-7xl xl:text-8xl font-condensed">Application</h1>
-            </div>
             {/* <form>
                 <div className="flex flex-row space-x-4">
                     <div className="w-1/2">
