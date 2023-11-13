@@ -38,6 +38,8 @@ export default function Navbar() {
     localStorage.removeItem("auth_token");
   }
 
+  console.log("queryData", queryData)
+
   return (
     <Disclosure as="nav" className="bg-black">
       {({ open }) => (
@@ -97,7 +99,7 @@ export default function Navbar() {
                   }
                   // aria-current={item.current ? 'page' : undefined}
                 >
-                  Self_Name
+                  {queryData && queryData.getAccountInfo && queryData.getAccountInfo.userDetail.firstName}
                 </Link>
                 {/* <button
                   type="button"

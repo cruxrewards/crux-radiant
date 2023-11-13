@@ -24,3 +24,13 @@ export const GET_ACCOUNT_INFO = gql`
     }
   }
 `;
+
+export const GET_CREDIT_INFO = gql`
+  query GetCreditInfo {
+    getCreditInfo {
+      id
+      lastFour
+      expirationDate
+    }
+  }
+`;
