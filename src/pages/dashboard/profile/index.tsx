@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client';
+import { COMPLETE_BANK_VERIFICATION } from '@/graphql/mutations/external_bank_account';
+import { GET_LINK_TOKEN, GET_PLAID_BANK_ACCOUNTS } from '@/graphql/queries/external_bank_account';
 import Router from 'next/router';
 import {
     usePlaidLink,
@@ -13,7 +16,25 @@ import { ThunkDispatch } from 'redux-thunk';
 import TuitionPortal from '@/components/payment/tuition_portal';
 
 export default function Profile() {
-    const [linkToken, setLinkToken] = useState("");
+    const { loading: queryLoading, error: queryError, data: queryData } = useQuery(GET_LINK_TOKEN)
+    const { loading: bankLoading, error: bankError, data: bankData } = useQuery(GET_PLAID_BANK_ACCOUNTS)
+    const linkToken = queryData && queryData.getLinkToken && queryData.getLinkToken.linkToken;
+     
+    const plaidAccounts = bankData && bankData.getPlaidBankAccounts
+    console.log("bankData", plaidAccounts)
+
+    return (
+        <>
+            {plaidAccounts && 
+                plaidAccounts.map((item: any, index: number) => (
+                    <h1 key={index}>{item.mask}</h1>
+                ))
+            }
+            <BankAuthentication linkToken = {linkToken}/>
+        </>
+    )
+}
+
 
 //     useEffect(() => {
 //         if (!user.authenticated) {
@@ -53,38 +74,39 @@ export default function Profile() {
 //     }
 // }
 
-// interface LinkProps {
-//     linkToken: string | null;
-// }
+interface LinkProps {
+    linkToken: string | null;
+}
 
-// function BankAuthentication(props: LinkProps) {
-//     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+function BankAuthentication(props: LinkProps) {
+    const [completeBankVerification, { data, loading, error} ] = useMutation(COMPLETE_BANK_VERIFICATION)
 
-//     function handleSuccess(public_token: string, metadata: any) {
-//         axios.post(`http://localhost:3001/api/v1/banking/complete-bank-verification`, {
-//             public_token: public_token,
-//             metadata: metadata,
-//         }, { withCredentials: true } ).then((res) => {
-//             if (res.data.status === "success") {
-//                 console.log(res.data)
-//                 dispatch(fetchPaymentMethods());
-//             }
-//         })
-//     }
+    function handleSuccess(publicToken: string, metadata: any) {
+        completeBankVerification({ variables: { publicToken: publicToken, metadata: metadata}})
+    }
 
-//     const config: PlaidLinkOptions = {
-//         onSuccess: (public_token, metadata) => {handleSuccess(public_token, metadata)},
-//         token: props.linkToken,
-//       };
+    // function handleSuccess(public_token: string, metadata: any) {
+    //     axios.post(`http://localhost:3001/api/v1/banking/complete-bank-verification`, {
+    //         public_token: public_token,
+    //         metadata: metadata,
+    //     }, { withCredentials: true } ).then((res) => {
+    //         if (res.data.status === "success") {
+    //             console.log(res.data)
+    //             dispatch(fetchPaymentMethods());
+    //         }
+    //     })
+    // }
 
-//     const { open, ready } = usePlaidLink(config);
+    const config: PlaidLinkOptions = {
+        onSuccess: (publicToken, metadata) => {handleSuccess(publicToken, metadata)},
+        token: props.linkToken,
+      };
+
+    const { open, ready } = usePlaidLink(config);
 
     return (
-        <>
-            <h1> hi</h1>
-            {/* <button  className='uppercase bg-gold hover:bg-white text-black font-mono py-2 px-20' onClick={() => open()} disabled={!ready}>
-                Link account
-            </button> */}
-        </>
+        <button  className='uppercase bg-gold hover:bg-white text-black font-mono py-2 px-20' onClick={() => open()} disabled={!ready}>
+            Link account
+        </button> 
     )
 }
