@@ -11,11 +11,8 @@ import client from '../../apollo-client'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Schools', href: '/school' },
-  // { name: 'Card', href: '/card' },
-  // { name: 'Rewards', href: '/rewards' },
-  // { name: 'Schools', href: '/school' },
-  { name: 'Dash', href: '/dashboard' },
+  { name: 'Card', href: '/card' },
+  { name: 'Tuition', href: '/school' },
 ]
 
 function classNames(...classes: any) {
@@ -31,6 +28,7 @@ export default function Navbar() {
   });
 
   const router = useRouter();
+  // const loggedIn = true;
   const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
 
   async function logout() {
@@ -88,16 +86,29 @@ export default function Navbar() {
               </div>
               { loggedIn && 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+                <Link
+                  key="profile"
+                  href={"/dashboard/profile"}
+                  className={
+                    'uppercase px-3 py-2 text-sm font-medium font-mono ' +
+                    (router.pathname == "/dashboard/profile"
+                      ? 'underline text-gold'
+                      : 'text-gray-300 hover:underline hover:text-white')
+                  }
+                  // aria-current={item.current ? 'page' : undefined}
+                >
+                  Self_Name
+                </Link>
+                {/* <button
                   type="button"
                   className="rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button> */}
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                {/* <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
@@ -148,11 +159,11 @@ export default function Navbar() {
                       </Menu.Item>}
                     </Menu.Items>
                   </Transition>
-                </Menu>
+                </Menu> */}
               </div>}
               {!loggedIn &&
                 <div className="lg:flex lg:flex-1 lg:justify-end pl-6">
-                  <Link href="/onboarding/login" className="uppercase text-sm font-mono py-2 px-4 leading-6 text-white hover:text-black ring-1 ring-white hover:bg-white hidden">
+                  <Link href="/onboarding/login" className="uppercase text-sm font-mono py-2 px-4 leading-6 text-white hover:text-black ring-1 ring-white hover:bg-white">
                       Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
                 </div>}

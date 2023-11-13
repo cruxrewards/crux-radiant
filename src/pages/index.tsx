@@ -23,12 +23,12 @@ export default function Home() {
           <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div className="py-5">
               <div className='h-[10px]'>
-                <Image
+                {/* <Image
                   className='object-contain'
                   src="/orig_color.svg"
                   alt="Crux Logo"
                   fill
-                />
+                /> */}
               </div>
               
             </div>
