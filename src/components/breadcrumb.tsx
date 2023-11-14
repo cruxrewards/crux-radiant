@@ -36,8 +36,8 @@ const Breadcrumb: FC<BreadProps> = ({ steps, currentStep }) => {
             ${index > currentStep ? next_color : ''}
             `}
           >
-            <p className="font-bebas text-2xl">{index + 1}</p>
-            <p className="font-bebas text-2xl">{step}</p> 
+            <p className="font-bebas text-xl">{index + 1}</p>
+            <p className="font-bebas text-xl">{step}</p> 
           </div>
         </div>
       ))}

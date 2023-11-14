@@ -65,7 +65,6 @@ export default function EmailPassForm({nextStep}: EmailPassFormProps) {
     return (
         <>
         <form onSubmit={registerUser}>
-            {/* <BreadComp index={0} /> */}
             <div>
                 <div className="flex">
                     <div className="flex flex-col w-1/2 justify-center px-2">
@@ -93,14 +92,14 @@ export default function EmailPassForm({nextStep}: EmailPassFormProps) {
                         </div>
                     </div>
                     <div className="w-1/2">
-                        <div className='-z-100 relative w-full'>
-                            <video className='-z-100' autoPlay muted playsInline src="/cardv6.webm" />
+                        <div className='flex flex-col -z-100 relative'>
+                          <video className='-z-100 h-96' autoPlay muted playsInline loop src="/cardv6.webm" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="mx-auto max-w-lg align-center py-2">
-                <p className="text-center font-mono">By continuing, I acknowledge the <span className="font-bold text-custom_purple">Privacy Notice</span>
+            <div className="mx-auto align-center py-2">
+                <p className="font-mono text-center text-black">By continuing, I acknowledge the <span className="font-bold text-custom_purple">Privacy Notice</span>
                     <br/>and agree to receive <span className="font-bold text-custom_purple">Electronic Disclosures.</span>
                 </p>
             </div>
