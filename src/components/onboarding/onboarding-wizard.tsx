@@ -5,8 +5,8 @@ import EmailPassForm from "./steps/email-pass-form";
 import ConfirmEmailForm from "./steps/confirm-email-form";
 import ApplicationForm from "./steps/application-form";
 import ReviewApplication from "./steps/review-application";
-import FormLayout from "./steps/wrapper";
 import Breadcrumb from "../breadcrumb";
+import DefaultBodyWrapper from "../core/defaultBodyWrapper";
 
 function getStepNumber(data: any) {
     if (!data || !data.getAccountInfo) {
@@ -73,14 +73,14 @@ export default function OnboardingWizard() {
         ) : null;
 
     return <>
-        <FormLayout>
+        <DefaultBodyWrapper>
             <div className="flex flex-col items-center">
                 <h1 className="uppercase text-6xl lg:text-7xl xl:text-8xl font-bebas">{breadcrumbSteps[activePageIndex]}</h1>
             </div>
             <Breadcrumb steps={breadcrumbSteps} currentStep={activePageIndex} /> 
             {currentStep}
-        </FormLayout>
-        <ButtonPrev/>
-        <ButtonNext/>
+        </DefaultBodyWrapper>
+        {/* <ButtonPrev/>
+        <ButtonNext/> */}
     </>
 }
