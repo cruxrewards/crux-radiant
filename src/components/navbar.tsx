@@ -90,7 +90,7 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Link
                   key="profile"
-                  href={"/dashboard/profile"}
+                  href={"/self"}
                   className={
                     'uppercase px-3 py-2 text-sm font-medium font-mono ' +
                     (router.pathname == "/dashboard/profile"
