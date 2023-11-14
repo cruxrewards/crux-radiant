@@ -48,7 +48,7 @@ export default function School() {
                 Whether you&#39;re a K-12 private school, community college, or a four-year university, Crux has a solution for you.
             </p>
         </div>
-        <button onClick={GraphQLCall}> get users </button>
+        <button onClick={GraphQLCall}>X</button>
     </div>
     </>
   )
