@@ -41,7 +41,9 @@ export default function Self() {
     <div className="grow flex">
       <div className="flex flex-col md:flex-row container mx-auto">
         <div className="w-1/3 p-6">
-          <h1 className="text-right uppercase text-6xl">Good<br />evening<br />Brandon</h1>
+          <h1 className="text-right uppercase text-6xl">Hello,<br />
+            {queryData && queryData.getAccountInfo.userDetail.firstName}
+          </h1>
         </div>
 
         <div className="w-2/3 p-6 divide-y space-y-6 divide-black">
