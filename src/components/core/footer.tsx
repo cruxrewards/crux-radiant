@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="w-full md:w-1/3 space-y-2">
           <p className="font-mono text-white text-sm hover:underline">Contact Us</p>
           <p className="font-mono text-white text-sm hover:underline">About</p> 
-          <p className="font-mono text-white text-sm hover:underline">Careers</p>
+          {/* <p className="font-mono text-white text-sm hover:underline">Careers</p> */}
         </div>
       </div>
     </div>
