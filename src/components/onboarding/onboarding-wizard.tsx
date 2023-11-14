@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GET_ACCOUNT_INFO } from '@/graphql/queries/account';
 import { useQuery } from '@apollo/client';
 import EmailPassForm from "./steps/email-pass-form";
@@ -32,7 +32,9 @@ export default function OnboardingWizard() {
     };
     
     const goPrevPage = () => {
+      if (activePageIndex > 0) {
         setActivePageIndex(index => index - 1);
+      }
     };
 
     const steps = [
@@ -53,18 +55,19 @@ export default function OnboardingWizard() {
 
     if (loading) return null
 
-    const ButtonPrev = () =>
-        activePageIndex > 0 ? (
-            <button
-                type="button"
-                onClick={goPrevPage}
-            >
-                previous
-            </button>
-        ) : null;
+    const ButtonPrev = () => (
+      <button
+        type="button"
+        onClick={goPrevPage}
+      >
+        previous
+      </button>
+    )
+
     const ButtonNext = () =>
         activePageIndex < steps.length - 1 ? (
             <button
+            // className="bg-red-500"
                 type="button"
                 onClick={goNextPage}
             >
@@ -74,13 +77,31 @@ export default function OnboardingWizard() {
 
     return <>
         <DefaultBodyWrapper>
+          <div className="flex flex-col justify-center w-full">
             <div className="flex flex-col items-center">
-                <h1 className="uppercase text-6xl lg:text-7xl xl:text-8xl font-bebas">{breadcrumbSteps[activePageIndex]}</h1>
+                <h1 className="uppercase text-4xl lg:text-5xl xl:text-6xl font-bebas">{breadcrumbSteps[activePageIndex]}</h1>
             </div>
-            <Breadcrumb steps={breadcrumbSteps} currentStep={activePageIndex} /> 
+            <Breadcrumb steps={breadcrumbSteps} currentStep={activePageIndex} />
+            
             {currentStep}
+          </div>
         </DefaultBodyWrapper>
         {/* <ButtonPrev/>
         <ButtonNext/> */}
     </>
+}
+
+function dev_Navigator(stateIndex: number) {
+  // const { devMode, setDevMode } = useContext(DevModeContext);
+
+  return (
+    <div className="flex flex-row">
+      <div className="flex w-1/2 bg-red-500 justify-center">
+        <button className="font-bold" onClick={goPrevPage}>PREVIOUS</button>
+      </div>
+      <div className="flex w-1/2 bg-green-500 justify-center">
+        <button className="font-bold" onClick={goNextPage}>NEXT</button>
+      </div>
+    </div>
+  )
 }
