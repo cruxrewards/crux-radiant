@@ -4,6 +4,7 @@ import { GET_ACCOUNT_INFO } from '@/graphql/queries/account'
 import { SIGNOUT_USER } from '@/graphql/mutations/authentication'
 import Link from 'next/link'
 import { BellIcon, Cog8ToothIcon, LinkIcon, DocumentIcon, ChatBubbleLeftRightIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import DefaultBodyWrapper from "@/components/core/defaultBodyWrapper";
 
 
 const sections = [
@@ -16,9 +17,6 @@ const sections = [
   { header: 'Support', links: [
     { name: 'Contact Us', icon: ChatBubbleLeftRightIcon, href: '#'},
   ]},
-  { header: 'Other', links: [
-    { name: 'Sign Out', icon: ArrowLeftOnRectangleIcon, href: '#'},
-  ]}
 ]
 
 export default function Self() {
@@ -38,8 +36,8 @@ export default function Self() {
   }
 
   return (
-    <div className="grow flex">
-      <div className="flex flex-col md:flex-row container mx-auto">
+    <DefaultBodyWrapper>
+      <div className="flex flex-col md:flex-row w-full">
         <div className="w-1/3 p-6">
           <h1 className="text-right uppercase text-6xl">Hello,<br />
             {queryData && queryData.getAccountInfo.userDetail.firstName}
@@ -52,7 +50,7 @@ export default function Self() {
               <h2 className="">{item.header}</h2>
               {item.links.map((subitem) => (
                 <Link href={subitem.href}>
-                  <div className="flex flex-row items-center max-w-fit p-2 hover:bg-red-100 space-x-2">
+                  <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2">
                     <subitem.icon className="h-4 w-4" />
                     <p>{subitem.name}</p>
                   </div>
@@ -60,8 +58,18 @@ export default function Self() {
               ))}
             </div>
           ))}
+
+          <div className="flex flex-col space-y-2">
+            <h2 className="">Other</h2>
+            <button onClick={logout}>
+              <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2">
+                <ArrowLeftOnRectangleIcon className="h-4 w-4" />
+                <p>Sign Out</p>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </DefaultBodyWrapper>
   )
 }

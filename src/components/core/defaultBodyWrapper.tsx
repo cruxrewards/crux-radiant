@@ -4,7 +4,7 @@
 
 export default function DefaultBodyWrapper({ children }: any) {
   return (
-    <div className='grow flex'>
+    <div className='grow flex bg-white'>
       <div className="flex container mx-auto">
         {children}
       </div>
