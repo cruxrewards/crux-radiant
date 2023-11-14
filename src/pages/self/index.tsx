@@ -50,9 +50,9 @@ export default function Self() {
               <h2 className="">{item.header}</h2>
               {item.links.map((subitem) => (
                 <Link href={subitem.href}>
-                  <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2">
-                    <subitem.icon className="h-4 w-4" />
-                    <p>{subitem.name}</p>
+                  <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2 group ease-in-out duration-300">
+                    <subitem.icon className="h-5 w-5 stroke-custom_purple group-hover:stroke-white" />
+                    <p className="text-black group-hover:text-white">{subitem.name}</p>
                   </div>
                 </Link>
               ))}
@@ -62,9 +62,9 @@ export default function Self() {
           <div className="flex flex-col space-y-2">
             <h2 className="">Other</h2>
             <button onClick={logout}>
-              <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2">
-                <ArrowLeftOnRectangleIcon className="h-4 w-4" />
-                <p>Sign Out</p>
+              <div className="flex flex-row items-center max-w-fit py-2 px-4 hover:bg-custom_purple space-x-2 group ease-in-out duration-300">
+                <ArrowLeftOnRectangleIcon className="h-5 w-5 stroke-custom_purple group-hover:stroke-white" />
+                <p className="text-black group-hover:text-white">Sign Out</p>
               </div>
             </button>
           </div>
