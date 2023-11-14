@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useMutation, useQuery } from '@apollo/client'
 import { GET_ACCOUNT_INFO } from '@/graphql/queries/account'
 import { SIGNOUT_USER } from '@/graphql/mutations/authentication'
-import client from '../../apollo-client'
-import logo from '../../public/orig_color.svg'
+import client from '../../../apollo-client'
+import logo from '../../../public/orig_color.svg'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -29,8 +29,8 @@ export default function Navbar() {
   });
 
   const router = useRouter();
-  // const loggedIn = true;
-  const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
+  const loggedIn = true;
+  // const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
 
   async function logout() {
     router.push('/');
@@ -63,7 +63,6 @@ export default function Navbar() {
                   <Image
                     src={logo}
                     alt="Crux Logo"
-                    // width={40}
                     height={32} 
                   />
                 </div>
@@ -191,7 +190,6 @@ export default function Navbar() {
                       ? 'underline text-gold'
                       : 'text-gray-300 hover:underline hover:text-white')
                   }
-                  // aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
