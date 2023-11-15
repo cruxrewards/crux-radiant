@@ -99,7 +99,7 @@ export default function Navbar() {
                   }
                   // aria-current={item.current ? 'page' : undefined}
                 >
-                  xx {queryData && queryData.getAccountInfo && queryData.getAccountInfo.userDetail.firstName}
+                  xx {queryData && queryData.getAccountInfo && queryData.getAccountInfo.userDetail && queryData.getAccountInfo.userDetail.firstName}
                 </Link>
                 {/* <button
                   type="button"
