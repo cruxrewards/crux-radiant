@@ -14,7 +14,8 @@ export default function Card() {
         {creditData && creditData.getCreditInfo && queryData &&
           <div>
             <VirtualCard
-              lastFour={creditData.getCreditInfo.lastFour}
+              pan={creditData.getCreditInfo.pan}
+              cvv={creditData.getCreditInfo.cvv}
               expirationDate={creditData.getCreditInfo.expirationDate}
               cardholderName={queryData.getAccountInfo.userDetail.firstName}
             />
@@ -45,9 +46,10 @@ export default function Card() {
 }
 
 interface VirtualCardProps {
-  lastFour: string;
+  pan: string;
   expirationDate: string;
   cardholderName: string;
+  cvv: string;
 }
 
 
@@ -72,7 +74,7 @@ function VirtualCard(props: VirtualCardProps) {
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
         <div>
           <h3 style={{ margin: 0, fontSize: '0.9em' }}>Card Number</h3>
-          <p style={{ fontSize: '0.8em' }}>XXXX-XXXX-XXXX-{props.lastFour}</p>
+          <p style={{ fontSize: '0.8em' }}>{props.pan}</p>
         </div>
         <div>
           <h3 style={{ margin: 0, fontSize: '0.9em' }}>Expires</h3>
@@ -81,7 +83,7 @@ function VirtualCard(props: VirtualCardProps) {
       </div>
       <div>
         <h3 style={{ margin: 0, fontSize: '0.9em' }}>CVV</h3>
-        <p style={{ fontSize: '0.8em', letterSpacing: '4px' }}>***</p>
+        <p style={{ fontSize: '0.8em', letterSpacing: '4px' }}>{props.cvv}</p>
       </div>
     </div>
   );

@@ -31,6 +31,8 @@ export const GET_CREDIT_INFO = gql`
       id
       lastFour
       expirationDate
+      cvv
+      pan
     }
   }
 `;
