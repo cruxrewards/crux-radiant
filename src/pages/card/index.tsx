@@ -39,7 +39,7 @@ export default function Card() {
               src={card_svg}
               height={192}
               alt="default card"
-              className='drop-shadow-lg'
+              className='drop-shadow-lg transition ease-in-out hover:scale-110 duration-300'
             />
           </div>
           <div className='flex flex-col w-1/3 h-full p-4 justify-center space-y-2 text-white font-mono'>
