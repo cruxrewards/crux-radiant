@@ -11,7 +11,7 @@ const sections = [
   { header: 'Profile', links: [
     { name: 'Activity', icon: BellIcon, href: '#'},
     { name: 'Settings', icon: Cog8ToothIcon, href: '/self/settings'},
-    { name: 'Linked Accounts', icon: LinkIcon, href: '/dashboard/profile'},
+    { name: 'Linked Accounts', icon: LinkIcon, href: '/dash/profile'},
     { name: 'Documents', icon: DocumentIcon, href: '#'},
   ]},
   { header: 'Support', links: [

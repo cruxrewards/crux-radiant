@@ -3,13 +3,13 @@ import Router from "next/router";
 import { GET_ACCOUNT_INFO } from "@/graphql/queries/account";
 import { useQuery } from "@apollo/client";
 
-import BasicCard from "@/components/dashboard/BasicCard";
-import BigCard from "@/components/dashboard/BigCard";
-import BlueCard from "@/components/dashboard/BlueCard";
-import CreditCard from "@/components/dashboard/CreditCard";
-import GreenCard from "@/components/dashboard/GreenCard";
-import RewardsCard from "@/components/dashboard/RewardsCard";
-import SmallCard from "@/components/dashboard/SmallCard";
+import BasicCard from "@/components/dash/BasicCard";
+import BigCard from "@/components/dash/BigCard";
+import BlueCard from "@/components/dash/BlueCard";
+import CreditCard from "@/components/dash/CreditCard";
+import GreenCard from "@/components/dash/GreenCard";
+import RewardsCard from "@/components/dash/RewardsCard";
+import SmallCard from "@/components/dash/SmallCard";
 import Image from "next/image";
 
 export default function Dashboard() {

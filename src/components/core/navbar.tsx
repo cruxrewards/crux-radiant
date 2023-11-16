@@ -29,14 +29,11 @@ export default function Navbar() {
   });
 
   const router = useRouter();
-  const loggedIn = true;
-  // const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
+  // const loggedIn = true;
+  const loggedIn = queryData !== undefined && queryData.getAccountInfo !== null;
 
-  async function logout() {
-    router.push('/');
-    const response = await signoutUser();
-    await refetch();
-    localStorage.removeItem("auth_token");
+  if (loggedIn) {
+    navigation[0] = {name: 'Home', href: '/dash'}
   }
 
   console.log("queryData", queryData)
@@ -93,7 +90,7 @@ export default function Navbar() {
                   href={"/self"}
                   className={
                     'uppercase px-3 py-2 text-sm font-medium font-mono ' +
-                    (router.pathname == "/dashboard/profile"
+                    (router.pathname == "/dash/profile"
                       ? 'underline text-gold'
                       : 'text-gray-300 hover:underline hover:text-white')
                   }

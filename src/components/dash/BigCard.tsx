@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function BigCard() {
   return (
     <div className='grow bg-white drop-shadow-lg px-2 py-1'>

@@ -38,7 +38,7 @@ export default function ReviewApplication({
             <button 
                 onClick = {() => {
                     completeApplication();
-                    Router.push('/dashboard')
+                    Router.push('/dash')
                 }}
             >
                 Complete Application
