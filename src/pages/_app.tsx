@@ -10,6 +10,7 @@ import client from "../../apollo-client"
 import { useQuery } from "@apollo/client";
 
 import HandleRoute from "@/components/handle_route";
+import '../styles.css'
 
 const barlow_condensed = Barlow_Condensed({
   weight: ['400', '600'],
