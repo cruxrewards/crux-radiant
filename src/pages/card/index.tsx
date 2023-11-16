@@ -16,13 +16,13 @@ const small_buttons = [
 ]
 
 const transactions = [
-  {name: 'Starbucks', desc: 'Restuarant', icon: 'starbucks.com', amount: 12.34},
-  {name: 'Apple', desc: 'Technology', icon: 'apple.com', amount: 999.99},
-  {name: 'Duke University', desc: 'University', icon: 'duke.edu', amount: 9876.54},
-  {name: 'Chick-fil-A', desc: 'Restuarant', icon: 'chick-fil-a.com', amount: 10.99},
-  {name: 'evo.com', desc: 'Sports', icon: 'evo.com', amount: 600.00},
-  {name: 'In-N-Out', desc: 'Restuarant', icon: 'in-n-out.com', amount: 8.73},
-  {name: 'Costco', desc: 'Wholesale', icon: 'costco.com', amount: 57.21},
+  {name: 'Starbucks', desc: 'Restuarant', icon: 'starbucks.com', amount: 12.34, date: '1/31'},
+  {name: 'Apple', desc: 'Technology', icon: 'apple.com', amount: 999.99, date: '1/30'},
+  {name: 'Duke University', desc: 'University', icon: 'duke.edu', amount: 9876.54, date: '1/30'},
+  {name: 'Chick-fil-A', desc: 'Restuarant', icon: 'chick-fil-a.com', amount: 10.99, date: '1/29'},
+  {name: 'evo.com', desc: 'Sports', icon: 'evo.com', amount: 600.00, date: '1/29'},
+  {name: 'In-N-Out', desc: 'Restuarant', icon: 'in-n-out.com', amount: 8.73, date: '1/29'},
+  {name: 'Costco', desc: 'Wholesale', icon: 'costco.com', amount: 57.21, date: '1/29'},
 ]
 
 
@@ -68,7 +68,7 @@ export default function Card() {
       <div className='grow flex flex-col container mx-auto'>
         <div className='flex h-32 w-full p-4 space-x-4 flex-wrap'>
           {small_buttons.map((item) => (
-            <div className='flex flex-col h-10 px-10 justify-center rounded-full bg-custom_gold border border-black hover:bg-black hover:text-white'>
+            <div className='flex flex-col h-10 px-10 justify-center rounded-full bg-custom_gold border border-black hover:bg-black hover:text-white ease-in-out duration-300'>
               <Link href={item.href} className='text-center whitespace-nowrap font-mono'>
                 {item.name}
               </Link>
@@ -78,9 +78,13 @@ export default function Card() {
 
         <div className='grow flex flex-col w-full divide-y divide-black'>
           <h2 className='py-2 px-4 text-3xl'>Transactions</h2>
-          <div className='grow flex flex-col py-2 divide-y divide-gray-300'>
+          <div className='grow flex flex-col divide-y divide-gray-300'>
             {transactions.map((item) => (
-              <div className='flex flex-row h-20 w-full px-10 py-2 space-x-8'>
+              <div className='flex flex-row h-20 w-full px-10 py-2 space-x-10 hover:bg-purple-100 ease-in-out duration-300'>
+                <div className='my-auto'>
+                  <p className='font-mono'>{item.date}</p>
+                </div>
+
                 <div className='aspect-square h-full rounded-full overflow-hidden border border-gray-300'>
                   <img src={'https://logo.clearbit.com/' + item.icon}/>
                 </div>
@@ -89,9 +93,9 @@ export default function Card() {
                   <p className='text-sm'>{item.desc}</p>
                   <p className='text-xl'>{item.name}</p>
                 </div>
-
+ 
                 <div className='my-auto'>
-                  <p className='text-2xl'>${item.amount}</p>
+                  <p className='text-2xl font-mono'>${item.amount}</p>
                 </div>
               </div>
             ))}
@@ -122,15 +126,6 @@ export default function Card() {
     //       <div style={{ marginBottom: '20px' }}>
     //         <p><strong>{queryData.getAccountInfo.userDetail.firstName}:</strong> 30 points</p>
     //       </div>
-    //     </div>
-
-    //     <div style={{ width: '300px', border: '2px solid #3498db', borderRadius: '15px', padding: '20px' }}>
-    //       <h2 style={{ fontWeight: 'bold', fontSize: '1.5em', color: '#3498db', marginBottom: '10px' }}>Transaction History</h2>
-    //       <ul style={{ listStyle: 'none', padding: 0 }}>
-    //         <li>2023-01-15 - Purchase at Store A (-$25.0)</li>
-    //         <li>2023-01-18 - Cashback Reward (+$100.0)</li>
-    //         {/* Add more transaction history items as needed */}
-    //       </ul>
     //     </div>
     //   </div>
     // </div>
