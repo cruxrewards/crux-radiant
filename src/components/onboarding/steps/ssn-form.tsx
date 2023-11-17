@@ -55,7 +55,10 @@ export default function SSNForm({
               value={ssn}
             />
           </div>
-          <button className='uppercase bg-gold hover:bg-white text-black font-mono py-2 px-20'>
+          <button 
+            className='uppercase bg-gold hover:bg-white text-black font-mono py-2 px-20'
+            onClick={nextStep}
+          >
             Continue
           </button>
         </div>
