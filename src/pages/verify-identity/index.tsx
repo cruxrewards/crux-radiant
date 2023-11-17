@@ -22,7 +22,7 @@ export default function IDV() {
             return newProgress;
         })
       }, 800);
-      
+
       return () => {
         clearInterval(timer);
       };
@@ -59,7 +59,7 @@ export default function IDV() {
           sx={{
             position: 'absolute',
             top: '50%',
-            left: '52%',
+            left: '51%',
             transform: 'translate(-50%, 50%)', // Adjust this value
           }}
         >
