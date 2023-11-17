@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ACCOUNT_INFO, GET_CREDIT_INFO } from '@/graphql/queries/account';
-import { FormControlLabel, Switch } from '@mui/material';
+import { GET_PLAID_BANK_ACCOUNTS } from '@/graphql/queries/external_bank_account';
+import { FormControlLabel, Menu, Switch } from '@mui/material';
 import Image from 'next/image'
 import card_svg from '../../../public/empty_card.svg'
 import Link from 'next/link';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const small_buttons = [
-  {name: 'Payment Due Feb 15', href: '#'},
-  {name: 'Details', href: '#'},
-  {name: 'Security', href: '#'},
-  {name: 'Support', href: '#'},
-  {name: 'Virtual Card', href: '#'},
-  {name: 'Referrals', href: '#'},
-]
+
+
 
 const transactions = [
   {name: 'Starbucks', desc: 'Restuarant', icon: 'starbucks.com', amount: 12.34, date: '1/31'},
@@ -29,18 +32,62 @@ const transactions = [
 export default function Card() {
   const { loading: queryLoading, error: queryError, data: queryData } = useQuery(GET_ACCOUNT_INFO);
   const { loading: creditLoading, error: creditError, data: creditData } = useQuery(GET_CREDIT_INFO);
+  const { loading: bankLoading, error: bankError, data: bankData } = useQuery(GET_PLAID_BANK_ACCOUNTS)
+
+  const [open, setOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const plaidAccounts = bankData ? bankData.getPlaidBankAccounts : []
+  console.log("plaidAccounts", plaidAccounts)
+
+  const menuItems = plaidAccounts.map((account: any) => <MenuItem value={account.mask}>Checking ****{account.mask}</MenuItem>)
+  if (menuItems) console.log("menu items", menuItems[0])
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleSelection = (event: SelectChangeEvent) => {
+    setPaymentMethod(event.target.value as string)
+  }
+
+  const small_buttons = [
+    {name: 'Payment Due NOV 17', href: '#', action: handleOpen},
+    {name: 'Security', href: '#'},
+    {name: 'Support', href: '#'},
+    {name: 'Virtual Card', href: '#'},
+    {name: 'Referrals', href: '#'},
+  ]
 
   return (
     <div className='grow flex flex-col bg-white'>
-      <div className='w-full h-60 gradient-background'>
+      <div className='w-full h-60 gradient-background relative'>
         <div className='flex flex-row h-full container mx-auto'>
-          <div className='w-2/3 flex flex-col h-full items-center justify-center'>
+          <div className='w-2/3 flex flex-col h-full items-center justify-center relative'>
             <Image 
               src={card_svg}
               height={192}
               alt="default card"
               className='drop-shadow-lg transition ease-in-out hover:scale-110 duration-300'
             />
+
+            {creditData && creditData.getCreditInfo && 
+            <>
+            <h1 style={{ position: 'absolute', top: '40%', left: '44%', transform: 'translate(-50%, -50%)', color: 'white', fontSize: 16, textAlign: 'center' }}>
+              {creditData.getCreditInfo.pan}
+            </h1>
+
+            <h1 style={{ position: 'absolute', top: '60%', left: '37%', color: 'white', fontSize: 16 }}>
+              {`CVV: ${creditData.getCreditInfo.cvv}`}
+            </h1>
+
+            <h1 style={{ position: 'absolute', top: '70%', left: '37%', color: 'white', fontSize: 16 }}>
+              {`EXP: ${creditData.getCreditInfo.expirationDate}`}
+            </h1>
+            </>
+            }
           </div>
           <div className='flex flex-col w-1/3 h-full p-4 justify-center space-y-2 text-white font-mono'>
             <div>
@@ -65,13 +112,39 @@ export default function Card() {
         </div>
       </div>
 
+      <div>
+      <Backdrop
+        sx={{ backgroundColor: 'rgba(255, 255, 255, 1)', color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <div>
+          <Box sx={{minWidth: 400, minHeight: 300 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Payment Method</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={paymentMethod}
+                label="Payment Method"
+                onChange={handleSelection}
+              >
+                {menuItems}
+              </Select>
+            </FormControl>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>Make Payment</Button>
+          </Box>
+        </div>
+      </Backdrop>
+    </div>
+
       <div className='grow flex flex-col container mx-auto'>
         <div className='flex h-32 w-full p-4 space-x-4 flex-wrap'>
           {small_buttons.map((item) => (
             <div className='flex flex-col h-10 px-10 justify-center rounded-full bg-custom_gold border border-black hover:bg-black hover:text-white ease-in-out duration-300'>
-              <Link href={item.href} className='text-center whitespace-nowrap font-mono'>
+              <button onClick = {item.action} className='text-center whitespace-nowrap font-mono'>
                 {item.name}
-              </Link>
+              </button>
             </div>
           ))}
         </div>

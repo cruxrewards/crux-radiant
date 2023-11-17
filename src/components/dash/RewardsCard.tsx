@@ -10,7 +10,7 @@ export default function RewardsCard() {
                     Rewards
                 </h2>
                 <p className='font-mono text-white group-hover:text-black text-2xl'>
-                    43,971 Crux Rewards Points
+                    123,456 Crux Rewards Points
                 </p>
             </div>
         </div>

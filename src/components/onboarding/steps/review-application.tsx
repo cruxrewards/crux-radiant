@@ -68,7 +68,7 @@ export default function ReviewApplication({
             className='uppercase bg-gold text-black font-mono py-2 px-20 hover:bg-white border border-white hover:border-black'
             onClick = {() => {
                 completeApplication();
-                Router.push('/dash')
+                Router.push('/verify-identity')
             }}
           >
               Complete Application

@@ -10,9 +10,9 @@ export default function CreditCard() {
                     Crux Credit Card
                 </h2>
                 <p className='font-mono text-2xl'>
-                    $378.65
+                    $1234.56
                 </p>
-                <p className='font-mono'>Next payment due 4/17/2023</p>
+                <p className='font-mono'>Next payment due 11/17/2023</p>
             </div>
         </div>
     </div>
